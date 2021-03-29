@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchBeers, selectSearchResults } from "./store/beerSlice";
+import "./App.css";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const searchRes = useSelector(selectSearchResults);
+  const [query, setQuery] = useState("");
+
+  const dispatch = useDispatch();
+
+  const handleClick = () => {
+    dispatch(fetchBeers(query));
+  };
+  const handleChange = (e) => {
+    setQuery(e.target.value);
+  };
+
+  return <div className="App"></div>;
 }
 
 export default App;
